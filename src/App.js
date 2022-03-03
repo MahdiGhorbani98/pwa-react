@@ -10,6 +10,7 @@ function App() {
     if (e.key === "Enter") {
       const data = await fetchWeather(query);
       setWeather(data);
+      console.log(data);
       setQuery("");
     }
   };
@@ -25,9 +26,24 @@ function App() {
         onKeyPress={search}
       />
       {weather.main && (
-        <div className="country">
-          <span>{weather.name}</span>
-          <sup>{weather.sys.country}</sup>
+        <div className="container">
+          <div className="country">
+            <span>{weather.name}</span>
+            <sup>{weather.sys.country}</sup>
+          </div>
+
+          <div className="temp">
+            <span>{Math.round(weather.main.temp)}</span>
+            <sup>&deg;C</sup>
+          </div>
+          <div className="info">
+            <img
+              className="city-icon"
+              src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+              alt={weather.weather[0].description}
+            />
+            <span>{weather.weather[0].description}</span>
+          </div>
         </div>
       )}
     </div>
